@@ -1,0 +1,19 @@
+{
+  "name": "projeto-final-oi",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./bin/www"
+  },
+  "dependencies": {
+    "ejs": "~2.6.1",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "moongose": "^1.0.0",
+    "node-uuid": "^1.4.8"
+  },
+  "devDependencies": {
+    "mongodb-memory-server": "^8.11.4",
+    "nodemon": "^2.0.20"
+  }
+}
