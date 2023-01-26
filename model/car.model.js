@@ -6,7 +6,7 @@ const carSchema = new mongoose.Schema({
     name: {type: String},
     model: {type: String},
     color: {type: String},
-    year: {type: Number}
+    year: {type: String}
 })
 
 exports.module = mongoose.model("Car", carSchema)
