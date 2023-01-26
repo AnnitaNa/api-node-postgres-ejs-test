@@ -1,71 +1,38 @@
-const carModel = require('../model/car.model')
+const carService = require("../services/car.service");
 
-class Car {
+class CarController {
     async getAll(req, res) {
-        let cars = await carModel.module.find();
-        let mapped = cars.map(car => {
-            return filterResponse(car)
-        })
-        res.send(mapped)
+        let cars = await carService.getAll();
+        console.log(cars);
+        res.send(cars);
     }
 
     async getById(req, res) {
-        const {id} = req.params;
-        let car = await carModel.module.findById(id);
+        const { id } = req.params;
+        let car = await carService.getById(id);
 
-        if(!car) {
-            return res.send("não consegui achar o carro")
-        }
-
-        let mapped = filterResponse(car)
-        res.send(mapped)
+        res.send(car);
     }
 
     async create(req, res) {
-        const {name, model, color, year} = req.body;
-        let car = await carModel.module.create({
-            name,
-            model,
-            color,
-            year
-        })
+        let car = await carService.create(req.body);
 
-        res.send("created")
+        res.send("created");
     }
 
     async update(req, res) {
-        const {id} = req.params;
-        let car = await carModel.module.findById(id);
+        const { id } = req.params;
+        let updateCar = await carService.update(id, req.body);
 
-        if(!car) {
-            return res.send("não consegui achar o carro")
-        }
-
-        let updateCar = await carModel.module.updateOne({_id: id}, req.body)
-
-        console.log(req.body)
-
-        res.send(updateCar)
+        res.send(updateCar);
     }
 
     async remove(req, res) {
-        const {id} = req.params;
-        let car = await carModel.module.findByIdAndDelete(id);
+        const { id } = req.params;
+        let car = await carService.remove(id);
 
-
-        let mapped = filterResponse(car)
-        res.send(mapped)
+        res.send("deleted");
     }
 }
 
-module.exports = new Car();
-
-function filterResponse(car) {
- return {
-        id: car._id,
-        name: car.name,
-        model: car.model,
-        color: car.color,
-        year: car.year
- }
-}
+module.exports = new CarController();
