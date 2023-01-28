@@ -14,7 +14,7 @@ function getData(form) {
     };
 
     fetch(endpoint, config).then(() => {
-        console.log(JSON.stringify(data));
+        location.href = "/"
     });
 }
 

@@ -1,7 +1,7 @@
-const carRepository = require("../DAO/car.repository");
+const carRepository = require("../infra/car.repository");
 
-exports.getAll = async () => {
-    let cars = await carRepository.getAll()
+exports.getAll = async (filters) => {
+    let cars = await carRepository.getAll(filters)
     let mapped = cars.map((car) => {
         return filterResponse(car);
     });
@@ -13,7 +13,7 @@ exports.getById = async (id) => {
     let car = await carRepository.getById(id)
 
     if (!car) {
-        return "não consegui achar o carro"
+        return 
     }
 
     let mapped = filterResponse(car);
@@ -21,10 +21,15 @@ exports.getById = async (id) => {
 };
 
 exports.create = async (params) => {
+    try {
+        let car = await carRepository.create(params);
+        return car;
+    }
     
-    let car = await carRepository.create(params);
-
-    return "created";
+    catch {
+        return null
+    }
+   
 };
 
 exports.update = async (id, params) => {
@@ -36,9 +41,7 @@ exports.update = async (id, params) => {
 
 exports.remove = async (id) => {
     let car = await carModel.module.findByIdAndDelete(id);
-
-    let mapped = filterResponse(car);
-    return mapped;
+    return car;
 };
 
 function filterResponse(car) {
