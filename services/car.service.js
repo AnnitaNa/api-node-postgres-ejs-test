@@ -40,7 +40,7 @@ exports.update = async (id, params) => {
 };
 
 exports.remove = async (id) => {
-    let car = await carModel.module.findByIdAndDelete(id);
+    let car = await carRepository.remove(id);
     return car;
 };
 
