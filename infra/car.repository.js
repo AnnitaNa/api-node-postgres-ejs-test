@@ -1,7 +1,6 @@
 const carModel = require("../model/car.model");
 
 exports.getAll = async (filters) => {
-    console.log('repository',filters)
     let cars = await carModel.module.find(filters);
     return cars;
 };

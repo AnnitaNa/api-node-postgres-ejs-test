@@ -20,6 +20,18 @@ const data = [
         "model": "model02",
         "color": "white",
         "year": "1990"
-    }
+    },
+    {
+        "name": "car03",
+        "model": "model01",
+        "color": "white",
+        "year": "1990"
+    },
+    {
+        "name": "car04",
+        "model": "model02",
+        "color": "blue",
+        "year": "1993"
+    },
 ]
 
