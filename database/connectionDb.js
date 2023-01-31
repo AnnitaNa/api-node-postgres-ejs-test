@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
-const MongoMemoryServer = require('mongodb-memory-server').MongoMemoryServer;
-const seed = require('./seeder')
+const mongoose = require("mongoose");
+const MongoMemoryServer = require("mongodb-memory-server").MongoMemoryServer;
+const seed = require("./seeder");
 
 // creates a mongo database in memory
- async function mongoDb() {
+async function mongoDb() {
     const mongoServer = await MongoMemoryServer.create();
     const mongoUri = mongoServer.getUri();
 
@@ -15,6 +15,3 @@ const seed = require('./seeder')
 }
 
 module.exports = mongoDb;
-
-
-

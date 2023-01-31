@@ -1,4 +1,3 @@
-
 function getData(form) {
     var formData = new FormData(form);
     const data = Object.fromEntries(formData);
@@ -9,12 +8,12 @@ function getData(form) {
         method: "POST",
         body: JSON.stringify(data),
         headers: new Headers({
-            "content-type": "application/json"
-        })
+            "content-type": "application/json",
+        }),
     };
 
     fetch(endpoint, config).then(() => {
-        location.href = "/"
+        location.href = "/";
     });
 }
 

@@ -1,30 +1,35 @@
 # Projeto Final
 
-> Projeto final do 6º modulo OiDevs by ADA
+> Projeto final do 5º modulo do OiDevs by ADA
 >
-> APi de Carros
+> Construção de uma API de Carros utilizando um SSR
 > 
 > Author: Tatiane A. Nicchetti
 
-## Dependências de arquivos e configurações
+## Rodando o Projeto
 
-### App express default
-
-O **express-generator** gera um app express padrão. Vamos usar a engine **ejs** para o front-end.
-
-```bash
-npx express-generator --ejs
-```
-
-Depois devemos baixar os módulos adicionados ao package.json
+1) Instale os pacotes do arquivo **package.json** rodando no terminal:
 
 ```bash
 npm i
 ```
 
-Vamos usar um bando de dado in memory, para isso precisamos baixar:
+2) suba o servidor
 
-```bash
-npm i -D mongodb-memory-server
-npm i moongose
 ```
+npm start
+```
+
+3) Confira o resultado na sua webBrowser
+
+A aplicação rodará na porta 3000. Coloque no seu browser http://localhost:3000/
+
+## Dependências de arquivos e configurações
+
+ - **express-generator**: gera um app express padrão. 
+ - **ejs**: Engine utilizada para o front-end
+ - **mongoose** e **mongodb-memory-server**: para utilizar o mongoDB como banco de Dados e permitir sua utilização em memória (dados reiniciam cada vez que o servidor sobe)
+ - **express**: framework para o nodeJs
+ - **http-errors**: lidar com erros no browser
+ - **node-uuid**: gerar GUID para o ID das entidades
+

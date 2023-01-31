@@ -1,5 +1,5 @@
 const endpoint = "http://localhost:3000/car";
-
+getAll(endpoint);
 
 function getAll(endpoint) {
     const config = {
@@ -8,6 +8,7 @@ function getAll(endpoint) {
     fetch(endpoint, config)
         .then((res) => res.json())
         .then((cars) => {
+            console.log(cars);
             document.querySelector("tbody").innerHTML = cars
                 .map((car) => {
                     return `<tr>
@@ -17,8 +18,8 @@ function getAll(endpoint) {
                         <td>${car.color}</td>
                         <td>${car.year}</td>
                         <td>
-                            <a class="edit" title="Edit" onclick="edit(this)">Edit</a>
-                            <a class="delete" title="Delete" onclick="remove(this)">Delete</a>
+                            <a class="edit" title="Edit" onclick="edit(this)"><button type="button" class="btn-sm btn-primary">Edit</button></a>
+                            <a class="delete" title="Delete" onclick="remove(this)"><button type="button" class="btn-sm btn-danger">Delete</button></a>
                         </td>
                     </tr>
                     `;
@@ -27,21 +28,18 @@ function getAll(endpoint) {
         });
 }
 
-getAll(endpoint);
-
 function getFilters(form) {
+    console.log(form);
     var formData = new FormData(form);
 
     let filters = Array.from(formData.entries())
-    .filter(
-        ([key, value]) => value != ""
-    )
-    .map(keyValue => keyValue.join("="))
-    .join("&&")
+        .filter(([key, value]) => value != "")
+        .map((keyValue) => keyValue.join("="))
+        .join("&&");
 
     const newEndpoint = endpoint + "?" + filters;
 
-    getAll(newEndpoint)
+    getAll(newEndpoint);
 }
 
 document.getElementById("filterCar").addEventListener("submit", function (e) {
@@ -50,23 +48,8 @@ document.getElementById("filterCar").addEventListener("submit", function (e) {
 });
 
 function getId(el) {
-    return el.parentNode.parentNode.getElementsByTagName('td')[0].childNodes[0].data;  
+    return el.parentNode.parentNode.getElementsByTagName("td")[0].childNodes[0]
+        .data;
 }
 
-function remove(el) {
-    const id = getId(el)
-    console.log(id)
 
-    const config = {
-        method: "DELETE",
-        headers: new Headers({
-            "content-type": "application/json"
-        })
-    };
-
-    const newEndpoint = endpoint + "/" + id
-
-    fetch(newEndpoint, config).then (() => {
-        getAll(endpoint)
-    })
-}

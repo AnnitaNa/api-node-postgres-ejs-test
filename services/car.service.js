@@ -33,7 +33,13 @@ exports.create = async (params) => {
 };
 
 exports.update = async (id, params) => {
-
+    
+    // empty params
+    Object.keys(params).forEach(key => {
+        if (!params[key]) {
+            delete params[key];
+        } 
+      });
     let updateCar = await carRepository.update(id, params);
 
     return updateCar;

@@ -11,10 +11,6 @@ router.get('/register', function(req, res, next) {
   res.render('register');
 });
 
-router.get('/edit', function(req, res, next) {
-  res.render('edit');
-});
-
 
 router.get('/car', carController.getAll)
 router.get('/car/:id', carController.getById)
