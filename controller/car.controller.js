@@ -1,11 +1,14 @@
 const carService = require("../services/car.service");
 
+
 class CarController {
     async getAll(req, res) {
-        const filters = req.query;
+        // const filters = req.query;
 
-        let cars = await carService.getAll(filters);
-        res.send(cars);
+        // let cars = await carService.getAll(filters);
+        // res.send(cars);
+        res.sendStatus(200)
+
     }
 
     async getById(req, res) {
@@ -21,10 +24,11 @@ class CarController {
     async create(req, res) {
         let car = await carService.create(req.body);
 
+ 
         if (!car) {
             res.status(404).send("couldn't create car");
         } else {
-            res.status(201).send("created");
+            res.status(201).send(car);
         }
     }
 
