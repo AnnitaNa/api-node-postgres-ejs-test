@@ -3,11 +3,10 @@ const carService = require("../services/car.service");
 
 class CarController {
     async getAll(req, res) {
-        // const filters = req.query;
+        const filters = req.query;
 
-        // let cars = await carService.getAll(filters);
-        // res.send(cars);
-        res.sendStatus(200)
+        let cars = await carService.getAll(filters);
+        res.status(200).send(cars);
 
     }
 
@@ -24,7 +23,7 @@ class CarController {
     async create(req, res) {
         let car = await carService.create(req.body);
 
- 
+        console.log("car",car)
         if (!car) {
             res.status(404).send("couldn't create car");
         } else {
@@ -38,8 +37,10 @@ class CarController {
 
         if (!updateCar) {
             res.status(404).send("couldn't update");
+        } else {
+            res.status(204).send(updateCar);
         }
-        res.status(204).send(updateCar);
+        
     }
 
     async remove(req, res) {
@@ -48,8 +49,10 @@ class CarController {
 
         if (!car) {
             res.status(404).send("couldn't find car");
+        } else {
+            res.status(204).send(car);
         }
-        res.status(204).send(car);
+       
     }
 }
 

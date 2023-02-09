@@ -12,16 +12,17 @@ exports.getById = async (id) => {
 
 exports.create = async (params) => {
     let car = await carModel.create(params);
-
     return car;
 };
 
 exports.update = async (id, params) => {
-    let updateCar = await carModel.findOneAndUpdate({ _id: id }, params);
+    let updateCar = await carModel.findOneAndUpdate({ _id: id }, params, {new: true});
+    console.log('update', updateCar)
     return updateCar;
 };
 
 exports.remove = async (id) => {
     let car = await carModel.findByIdAndDelete(id);
+    console.log('car', car)
     return car;
 };
