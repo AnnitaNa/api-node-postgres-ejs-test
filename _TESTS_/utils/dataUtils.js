@@ -1,4 +1,24 @@
 class DataUtils {
+
+    static RequestMock = (params, body, query) => ({
+        params,
+        body,
+        query
+    })
+
+    static ResponseMock = () => ({
+        status: (statusCode) =>  ({
+            json: (message) =>  ({
+                status: statusCode,
+                data: message
+            
+            })
+        })
+
+    })
+         
+    
+
     static validBody = {
         name: "name00",
         model: "model00",

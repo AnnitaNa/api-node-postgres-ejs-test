@@ -4,10 +4,9 @@ const carService = require("../services/car.service");
 class CarController {
     async getAll(req, res) {
         const filters = req.query;
-
+        console.log(filters)
         let cars = await carService.getAll(filters);
-        res.status(200).send(cars);
-
+        return res.status(200).json(cars);
     }
 
     async getById(req, res) {
@@ -15,43 +14,60 @@ class CarController {
         let car = await carService.getById(id);
 
         if (!car) {
-            res.status(404).send("couldn't find car");
+          return  res.status(404).json("couldn't find car");
         }
-        res.send(car);
+        return res.status(200).json(car);
     }
 
     async create(req, res) {
+
+        const {name, model, color, year} = req.body
+        if(!name || !model | !color || !year) {
+            return res.status(400).json("all params of car must be passed");
+        }
         let car = await carService.create(req.body);
 
-        console.log("car",car)
         if (!car) {
-            res.status(404).send("couldn't create car");
+           return res.status(404).json("couldn't create car");
         } else {
-            res.status(201).send(car);
+           return res.status(201).json('created');
+           
         }
     }
 
     async update(req, res) {
         const { id } = req.params;
+
+        if(!id) {
+            return res.status(400).json("ID was not passed");
+        }
+
         let updateCar = await carService.update(id, req.body);
 
         if (!updateCar) {
-            res.status(404).send("couldn't update");
-        } else {
-            res.status(204).send(updateCar);
-        }
+          return  res.status(404).json("Couldn't update");
+        } 
+        
+        return res.status(204).json(updateCar);
+    
         
     }
 
     async remove(req, res) {
         const { id } = req.params;
+
+        if(!id) {
+            return res.status(400).json("ID was not passed");
+        }
+
         let car = await carService.remove(id);
 
         if (!car) {
-            res.status(404).send("couldn't find car");
-        } else {
-            res.status(204).send(car);
-        }
+           return res.status(404).json("couldn't find car");
+        } 
+        
+        return  res.status(204).json(car);
+        
        
     }
 }

@@ -2,34 +2,23 @@ const carRepository = require("../infra/car.repository");
 
 exports.getAll = async (filters) => {
     let cars = await carRepository.getAll(filters)
-    let mapped = cars.map((car) => {
-        return filterResponse(car);
-    });
 
-    return mapped;
+    return cars;
 };
 
 exports.getById = async (id) => {
     let car = await carRepository.getById(id)
 
-    if (!car) {
-        return 
-    }
+    if (!car) null
 
-    let mapped = filterResponse(car);
-    return mapped;
+    return car
 };
 
+
 exports.create = async (params) => {
-    try {
+    
         let car = await carRepository.create(params);
         return car;
-    }
-    
-    catch {
-        return null
-    }
-   
 };
 
 exports.update = async (id, params) => {
@@ -50,12 +39,3 @@ exports.remove = async (id) => {
     return car;
 };
 
-function filterResponse(car) {
-    return {
-        id: car._id,
-        name: car.name,
-        model: car.model,
-        color: car.color,
-        year: car.year,
-    };
-}

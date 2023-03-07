@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">40.74% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>11/27</span>
+                <span class='fraction'>28/28</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">40.74% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>11/27</span>
+                <span class='fraction'>28/28</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -90,60 +90,63 @@
 <a name='L25'></a><a href='#L25'>25</a>
 <a name='L26'></a><a href='#L26'>26</a>
 <a name='L27'></a><a href='#L27'>27</a>
-<a name='L28'></a><a href='#L28'>28</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const carModel = require("../model/car.model");
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const {module: carModel} = require("../model/car.model");
 &nbsp;
-exports.getAll = <span class="fstat-no" title="function not covered" >async (filters) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    let cars = await carModel.module.find(filters);</span>
-<span class="cstat-no" title="statement not covered" >    return cars;</span>
-<span class="cstat-no" title="statement not covered" >};</span>
+exports.getAll = async (filters) =&gt; {
+    let cars = await carModel.find(filters);
+    return cars;
+};
 &nbsp;
-exports.getById = <span class="fstat-no" title="function not covered" >async (id) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    let car = await carModel.module.findById(id);</span>
-<span class="cstat-no" title="statement not covered" >    return car;</span>
-<span class="cstat-no" title="statement not covered" >};</span>
+exports.getById = async (id) =&gt; {
+    let car = await carModel.findById(id);
+    return car;
+};
 &nbsp;
-exports.create = <span class="fstat-no" title="function not covered" >async (params) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    let car = await carModel.module.create(params);</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    return car;</span>
-<span class="cstat-no" title="statement not covered" >};</span>
+exports.create = async (params) =&gt; {
+    let car = await carModel.create(params);
+    return car;
+};
 &nbsp;
-exports.update = <span class="fstat-no" title="function not covered" >async (id, params) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    let updateCar = await carModel.module.findOneAndUpdate({ _id: id }, params);</span>
-<span class="cstat-no" title="statement not covered" >    return updateCar;</span>
-<span class="cstat-no" title="statement not covered" >};</span>
+exports.update = async (id, params) =&gt; {
+    let updateCar = await carModel.findOneAndUpdate({ _id: id }, params, {new: true});
+    console.log('update', updateCar)
+    return updateCar;
+};
 &nbsp;
-exports.remove = <span class="fstat-no" title="function not covered" >async (id) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    let car = await carModel.module.findByIdAndDelete(id);</span>
-<span class="cstat-no" title="statement not covered" >    return car;</span>
-<span class="cstat-no" title="statement not covered" >};</span>
+exports.remove = async (id) =&gt; {
+    let car = await carModel.findByIdAndDelete(id);
+    console.log('car', car)
+    return car;
+};
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -151,7 +154,7 @@ exports.remove = <span class="fstat-no" title="function not covered" >async (id)
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-02-03T16:10:53.280Z
+                at 2023-02-13T16:53:25.338Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

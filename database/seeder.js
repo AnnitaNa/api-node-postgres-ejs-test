@@ -32,3 +32,5 @@ const data = [
         year: "1993",
     },
 ];
+
+exports.seederData = data

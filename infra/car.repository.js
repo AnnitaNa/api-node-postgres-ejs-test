@@ -10,6 +10,7 @@ exports.getById = async (id) => {
     return car;
 };
 
+
 exports.create = async (params) => {
     let car = await carModel.create(params);
     return car;
@@ -17,12 +18,10 @@ exports.create = async (params) => {
 
 exports.update = async (id, params) => {
     let updateCar = await carModel.findOneAndUpdate({ _id: id }, params, {new: true});
-    console.log('update', updateCar)
     return updateCar;
 };
 
 exports.remove = async (id) => {
     let car = await carModel.findByIdAndDelete(id);
-    console.log('car', car)
     return car;
 };
