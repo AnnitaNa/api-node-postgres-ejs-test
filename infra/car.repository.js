@@ -4,12 +4,19 @@ const {PrismaClient} = require('@prisma/client')
 const prisma = new PrismaClient();
 
 exports.getAll = async (filters) => {
-    let cars = await prisma.car.findMany()
+    let cars = await prisma.car.findMany({
+        where: filters
+    })
     return cars;
 };
 
 exports.getById = async (id) => {
-    let car = await carModel.findById(id);
+    let car = await prisma.car.findFirst({
+        where: {
+            id: Number(id)
+        }
+    })
+
     return car;
 };
 
@@ -22,11 +29,21 @@ exports.create = async (params) => {
 };
 
 exports.update = async (id, params) => {
-    let updateCar = await carModel.findOneAndUpdate({ _id: id }, params, {new: true});
+    let updateCar = await prisma.car.update({
+        where: {
+            id: Number(id)
+        },
+        data: params
+    })
+   
     return updateCar;
 };
 
 exports.remove = async (id) => {
-    let car = await carModel.findByIdAndDelete(id);
+    let car = await prisma.car.delete({
+        where: {
+            id: Number(id)
+        }
+    })
     return car;
 };
