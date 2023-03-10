@@ -49,7 +49,7 @@ function completeForm(car) {
 
 function post(btn) {
     event.preventDefault();
-    const form = btn.parentNode.parentNode;
+    const form = btn.parentNode;
     var formData = new FormData(form);
     let changes = Object.fromEntries(formData);
 
