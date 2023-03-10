@@ -1,7 +1,10 @@
-const {module: carModel} = require("../model/car.model");
+
+const {PrismaClient} = require('@prisma/client')
+
+const prisma = new PrismaClient();
 
 exports.getAll = async (filters) => {
-    let cars = await carModel.find(filters);
+    let cars = await prisma.car.findMany()
     return cars;
 };
 
@@ -12,7 +15,9 @@ exports.getById = async (id) => {
 
 
 exports.create = async (params) => {
-    let car = await carModel.create(params);
+    let car = await prisma.car.create({
+        data: params
+    })
     return car;
 };
 
