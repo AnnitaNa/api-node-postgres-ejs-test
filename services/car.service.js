@@ -16,7 +16,11 @@ exports.getById = async (id) => {
 
 
 exports.create = async (params) => {
-    
+        const isCar = await carRepository.getAll(params.name)
+        if(isCar.length != 0) {
+            return null
+        }
+        
         let car = await carRepository.create(params);
         return car;
 };

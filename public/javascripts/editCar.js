@@ -58,7 +58,6 @@ function post(btn) {
             delete changes[key];
         }
     });
-    console.log(changes);
 
     const config = {
         method: "PATCH",

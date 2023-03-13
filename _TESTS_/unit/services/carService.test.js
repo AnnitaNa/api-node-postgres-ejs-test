@@ -20,19 +20,33 @@ describe("[ UNIT ] CAR SERVICE", () => {
     beforeEach(() => jest.resetModules());
 
     describe("Create", () => {
+        it("should return null when car name is not unique", async () => {
+            getAll.mockImplementationOnce(() => ['duplicate name']);
+            let response = await carService.create(Utils.invalidBody);
+
+            expect(response).toBeNull();
+        });
+
+        it("should return null when body is invalid", async () => {
+            getAll.mockImplementationOnce(() => []);
+            create.mockImplementationOnce(() => null);
+   
+            let response = await carService.create(Utils.validBody);
+
+            expect(response).toBeNull();
+        });
+
         it("should create a Car when body is valid", async () => {
+            getAll.mockImplementationOnce(() => []);
             create.mockImplementationOnce(() => Utils.validBody);
+  
             let response = await carService.create(Utils.validBody);
 
             expect(response).toStrictEqual(Utils.validBody);
         });
 
-        it("should return null when body is invalid", async () => {
-            create.mockImplementationOnce(() => null);
-            let response = await carService.create(Utils.invalidBody);
-
-            expect(response).toBeNull();
-        });
+    
+       
     });
 
     describe("GetAll", () => {

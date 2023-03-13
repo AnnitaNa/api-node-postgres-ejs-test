@@ -4,8 +4,8 @@ const carService = require("../services/car.service");
 class CarController {
     async getAll(req, res) {
         const filters = req.query;
-        console.log(filters)
         let cars = await carService.getAll(filters);
+        
         return res.status(200).json(cars);
     }
 
@@ -28,7 +28,7 @@ class CarController {
         let car = await carService.create(req.body);
 
         if (!car) {
-           return res.status(404).json("couldn't create car");
+           return res.status(409).json("couldn't create car because name is not unique");
         } else {
            return res.status(201).json('created');
            

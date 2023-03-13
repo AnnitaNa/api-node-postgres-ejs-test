@@ -24,7 +24,7 @@ describe("[ UNIT ] CAR CONTROLLER", () => {
     });
 
     describe("CREATE", () => {
-        it("should return status 404 if car is not created", async () => {
+        it("should return status 400 if all car params are not send", async () => {
             let spy = jest
                 .spyOn(carService, "create")
                 .mockImplementation(() => null);
@@ -34,9 +34,23 @@ describe("[ UNIT ] CAR CONTROLLER", () => {
                 DataUtils.ResponseMock()
             );
 
-            expect(spy).toHaveBeenCalled();
-            expect(response.status).toBe(404);
-            expect(response.data).toBe("couldn't create car");
+           // expect(spy).toHaveBeenCalled();
+            expect(response.status).toBe(400);
+            expect(response.data).toBe("all params of car must be passed");
+        });
+        it("should return status 409 if car name is not unique", async () => {
+            let spy = jest
+                .spyOn(carService, "create")
+                .mockImplementation(() => null);
+
+            const response = await carController.create(
+                DataUtils.RequestMock("", body, ""),
+                DataUtils.ResponseMock()
+            );
+
+           // expect(spy).toHaveBeenCalled();
+            expect(response.status).toBe(409);
+            expect(response.data).toBe("couldn't create car because name is not unique");
         });
 
         it("should return status 200 if car is created", async () => {

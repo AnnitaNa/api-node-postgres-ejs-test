@@ -5,7 +5,6 @@ function getId(el) {
 
 function remove(el) {
     const id = getId(el);
-    console.log(id);
 
     const config = {
         method: "DELETE",

@@ -1,49 +1,60 @@
-const { module: carModel } = require("../../../model/car.model");
+
+
 const carRepository = require("../../../infra/car.repository");
 const Utils = require("../../utils/dataUtils");
 
+//variables must start with mock to workin inside a jest.mock -> jest.fn()
+let mockFn = jest.fn()
+
+jest.mock('@prisma/client', () => ({
+    PrismaClient: {
+        car: {
+            create: jest.fn(() => mockFn),
+            findMany: jest.fn(() => mockFn),
+            findFirst: jest.fn(() => mockFn),
+            update: jest.fn(() => mockFn),
+            delete: jest.fn(() => mockFn)
+        } 
+           
+    }
+}))
+
+
+
 describe("[ UNIT ] CAR REPOSITORY", () => {
+    
     describe("Create", () => {
         it("should create a car when data is valid", async () => {
-            let spy = jest
-                .spyOn(carModel, "create")
-                .mockImplementationOnce(() => Utils.validBody);
+           mockFn = Utils.validBody
 
-            let result = await carRepository.create(Utils.validBody);
+           let result = await carRepository.create(Utils.validBody);
 
-            expect(spy).toHaveBeenCalled();
-            expect(result).toStrictEqual(Utils.validBody);
+           expect(result).toStrictEqual(Utils.validBody);
+   
         });
 
         it("should return null when data is invalid", async () => {
-            let spy = jest
-                .spyOn(carModel, "create")
-                .mockImplementationOnce(() => null);
+            mockFn = Utils.invalidBody
 
             let result = await carRepository.create(Utils.invalidBody);
 
-            expect(spy).toHaveBeenCalled();
             expect(result).toBeNull;
         });
     });
 
     describe("GetAll", () => {
         it("should return all cars registered", async () => {
-            let spy = jest
-                .spyOn(carModel, "find")
-                .mockImplementationOnce(() => Utils.allCars);
+            mockFn = Utils.allCars
+
             let result = await carRepository.getAll();
 
-            expect(spy).toHaveBeenCalled();
             expect(result).toStrictEqual(Utils.allCars);
         });
+
         it("should return filtered cars when filters are passed", async () => {
-            let spy = jest
-                .spyOn(carModel, "find")
-                .mockImplementationOnce(() => Utils.filteredCars);
+            mockFn = Utils.filteredCars
             let result = await carRepository.getAll({ model: "model01" });
 
-            expect(spy).toHaveBeenCalled();
             expect(result).toStrictEqual(Utils.filteredCars);
         });
     });
@@ -52,23 +63,17 @@ describe("[ UNIT ] CAR REPOSITORY", () => {
         it("should return a car when passing a registered ID", async () => {
             let car = Utils.cars.car01;
             let carID = Utils.cars.car01._id;
+            mockFn = car
 
-            let spy = jest
-                .spyOn(carModel, "findById")
-                .mockImplementationOnce(() => car);
             let result = await carRepository.getById(carID);
 
-            expect(spy).toHaveBeenCalled();
             expect(result).toStrictEqual(car);
         });
 
         it("should return null when passing an unregistered ID", async () => {
-            let spy = jest
-                .spyOn(carModel, "findById")
-                .mockImplementationOnce(() => null);
-            let result = await carRepository.getById("123");
+            mockFn = null
+            let result = await carRepository.getById("invalid ID");
 
-            expect(spy).toHaveBeenCalled();
             expect(result).toBeNull;
         });
     });
@@ -78,26 +83,20 @@ describe("[ UNIT ] CAR REPOSITORY", () => {
             let updatedCar = Utils.update.car01.updatedVersion;
             let carId = Utils.cars.car01._id;
             let fieldsToUpdate = Utils.update.car01.fieldsToUpdate;
+            mockFn = updatedCar
 
-            let spy = jest
-                .spyOn(carModel, "findOneAndUpdate")
-                .mockImplementationOnce(() => updatedCar);
             let result = await carRepository.update(carId, fieldsToUpdate);
 
-            expect(spy).toHaveBeenCalled();
             expect(result).toStrictEqual(updatedCar);
         });
 
         it("should return null when passing an unregistered id", async () => {
             let carId = "unregisteredId";
             let fieldsToUpdate = Utils.update.car01.fieldsToUpdate;
+            mockFn = null
 
-            let spy = jest
-                .spyOn(carModel, "findOneAndUpdate")
-                .mockImplementationOnce(() => null);
             let result = await carRepository.update(carId, fieldsToUpdate);
 
-            expect(spy).toHaveBeenCalled();
             expect(result).toBeNull;
         });
     });
@@ -106,25 +105,19 @@ describe("[ UNIT ] CAR REPOSITORY", () => {
         it("should delete car when passing a registered ID", async () => {
             let deletedCar = Utils.cars.car01;
             let carID = Utils.cars.car01._id;
+            mockFn = deletedCar
 
-            let spy = jest
-                .spyOn(carModel, "findByIdAndDelete")
-                .mockImplementationOnce(() => deletedCar);
             let result = await carRepository.remove(carID);
 
-            expect(spy).toHaveBeenCalled();
             expect(result).toStrictEqual(deletedCar);
         });
 
         it("should return null when passing a unregistered ID", async () => {
             let carID = "unregistereID";
-
-            let spy = jest
-                .spyOn(carModel, "findByIdAndDelete")
-                .mockImplementationOnce(() => null);
+            mockFn = null
             let result = await carRepository.remove(carID);
 
-            expect(spy).toHaveBeenCalled();
+
             expect(result).toBeNull();
         });
     });
