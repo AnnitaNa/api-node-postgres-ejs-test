@@ -11,6 +11,10 @@ class CarController {
 
     async getById(req, res) {
         const { id } = req.params;
+        if(!id) {
+            return res.status(400).json("ID was not passed");
+        }
+
         let car = await carService.getById(id);
 
         if (!car) {
@@ -25,6 +29,7 @@ class CarController {
         if(!name || !model | !color || !year) {
             return res.status(400).json("all params of car must be passed");
         }
+        
         let car = await carService.create(req.body);
 
         if (!car) {
@@ -42,15 +47,13 @@ class CarController {
             return res.status(400).json("ID was not passed");
         }
 
-        let updateCar = await carService.update(id, req.body);
 
-        if (!updateCar) {
-          return  res.status(404).json("Couldn't update");
-        } 
-        
-        return res.status(204).json(updateCar);
-    
-        
+            let updateCar = await carService.update(id, req.body);
+        if(!updateCar) {
+            return  res.status(404).json("could1nt update car");
+        }
+
+        return res.status(204).json(updateCar); 
     }
 
     async remove(req, res) {
@@ -60,13 +63,16 @@ class CarController {
             return res.status(400).json("ID was not passed");
         }
 
-        let car = await carService.remove(id);
+        let car = await carService.remove(id, req.body);
 
         if (!car) {
-           return res.status(404).json("couldn't find car");
-        } 
-        
-        return  res.status(204).json(car);
+            return  res.status(404).json("couldn't find car");
+        }
+
+        return res.status(204).json(car);
+
+           
+
         
        
     }
