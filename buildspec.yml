@@ -5,6 +5,9 @@ phases:
         commands:
             - echo Install packages...
             - npm install
+            - echo Synchonazing database...
+            - npx prisma db push
+            - npx prisma migrate dev --name migration-name
     build:
         commands:
             - echo Running tests...

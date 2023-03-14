@@ -4,7 +4,6 @@ let {seedData} = require('./seedData')
 
 async function seedCar() {
   for (let i =0; i< seedData.length; i++) {
-    console.log('seeding...')
     await prisma.car.upsert({
       where: { name: seedData[i].name },
       update: {},
