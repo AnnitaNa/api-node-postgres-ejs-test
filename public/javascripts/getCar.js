@@ -1,8 +1,5 @@
+const endpoint = `http://${window.location.host}/car`;
 
-
-
-const endpoint = `${process.env.HOST}/car`;
-// const endpoint = "http://localhost:3000/car";
 getAll(endpoint);
 
 function getAll(endpoint) {

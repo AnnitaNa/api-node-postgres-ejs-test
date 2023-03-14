@@ -2,7 +2,7 @@ function getData(form) {
     var formData = new FormData(form);
     const data = Object.fromEntries(formData);
 
-    const endpoint = "http://localhost:3000/car";
+    const endpoint = `http://${window.location.host}/car`;
 
     const config = {
         method: "POST",
